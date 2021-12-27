@@ -28,20 +28,20 @@ class Solution:
                 logest_palindrome_start_index = i - (longestPalindrome_length-1) // 2
                 print("longestPalindrome_length = " + str(longestPalindrome_length))
         return s[logest_palindrome_start_index : logest_palindrome_start_index + longestPalindrome_length]
-        
-    
+
+
     def get_longest_palindrome_len_from_center(self, s: str, l: int, r: int) -> int:
         while (l>=0 and r<len(s) and s[l]==s[r]):
             l-=1
             r+=1
         return (r-1) - (l+1) + 1
-        
+
 
 def main():
     s="babad"
     solution = Solution()
     print(solution.longestPalindrome(s))
-    
+
 
 if __name__ == '__main__':
     main()
