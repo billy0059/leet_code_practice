@@ -17,28 +17,22 @@ class Solution:
         end_index = 0
         logest_holiday = 0
         # Start to spend some PTOs on workdays!
-        while end_index<len(holiday_list) and pto>0:
+        while end_index<len(holiday_list):
             if holiday_list[end_index] == 0: # means it is workday, we need take a pto
                 pto -= 1
+            #PTO is ran out and the work list is not yet finished, we need to decrease the "window" for more PTO.
+            while pto < 0:
+                if holiday_list[start_index] == 0: # Take back the previously spent PTO, otherwise decrease window for no gain.
+                    pto += 1
+                start_index += 1
             end_index += 1
             logest_holiday = max(logest_holiday, end_index - start_index)
 
-        # PTO is ran out and the work list is not yet finished, we need to shift the "window"
-        while end_index<len(holiday_list):
-            if holiday_list[end_index] == 1:
-                end_index +=1
-                logest_holiday = max(logest_holiday, end_index - start_index)
-                continue
-            elif holiday_list[start_index] == 1:
-                start_index += 1
-            else: # Previous pto change to the end_index position.
-                start_index += 1
-                end_index +=1
         return logest_holiday
 
 def main():
-    input = [1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0]
-    pto = 10
+    input = [0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,1]
+    pto = 9
     solution = Solution()
     print(solution.longestHoliday(input, pto))
 
