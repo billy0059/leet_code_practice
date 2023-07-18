@@ -14,5 +14,5 @@ class Solution:
                 while consecutive in nums_set: # If the next consecutive number is in the set, go on for it!
                     tmp_longest_len += 1
                     consecutive += 1
-                    ret_longest_len = max(ret_longest_len, tmp_longest_len)
+                ret_longest_len = max(ret_longest_len, tmp_longest_len)
         return ret_longest_len
